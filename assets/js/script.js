@@ -10,15 +10,16 @@
 // end game when timer is done or all questions are awnsered correctly
 // save score 
 
-var startBtn = document.querySelector(".start");
-var timerSpan = document.querySelector(".timer");
-var timer = 3; 
-
+var startBtn = document.querySelector("#start");
+var timerSpan = document.querySelector("#timer");
+var timer = 883; 
+var questionEl = document.querySelector("#questionEl");
+var questionCounter = 0;
 var questions = [
     {
       question: "Commmonly used data type DO NOT include?",
       choices: ['strings', 'alerts', 'boolean', 'numbers'],
-      correctAnswer: 'alerts',
+      correctAnswer: '1',
     },
     {
       question: "The condition in a if/else statement is enclosed within _?",
@@ -28,11 +29,15 @@ var questions = [
     { question: "What does CSS stand for?",
       choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
       correctAnswer: 'Cascading Style Sheets',  
+    },
+    { question: "What does CSfghbfghjS stand for?",
+      choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
+      correctAnswer: '3',  
     }
   ];
 
 startBtn.addEventListener("click", function () {
-  document.querySelector('.questions').textContent=questions[0].question;
+  document.querySelector('#questions').textContent=questions[0].question;
   
   //document.querySelector('.btns').textContent=choices;
   var gameTimer = setInterval(function () {
@@ -45,11 +50,24 @@ startBtn.addEventListener("click", function () {
     showQuestions();
 })
 
-function showQuestions(event) {
-  document.querySelector('.questions')
+function showQuestions() {
+questionEl.textContent=questions[questionCounter].question;
+btn1.textContent=questions[questionCounter].choices[0];
+btn2.textContent=questions[questionCounter].choices[1];
+btn3.textContent=questions[questionCounter].choices[2];
+btn4.textContent=questions[questionCounter].choices[3];
+  //document.querySelector('.questions')
   //event.preventDefault();
   //console.log(event)
 }
+
+questionCounter++
+if (questionCounter==questions.length){
+  showResults()
+}
+
+///choice1.addEventListener("click", showQuestions);
+
 
 // ideally hide and unhide question cycyling through
 
