@@ -43,29 +43,31 @@ var questions = [
   ];
 
 ///diplay block/show
-questionPage.style.display = "none"
+ questionPage.style.display = "none"
 openingPage.style.display = "block"
-lastPage.style.display = "none"
+ lastPage.style.display = "none"
 
 
 startBtn.addEventListener("click", function () {
-  document.querySelector('#questions').textContent=questions[0].question;
-  // openingPage.style.display = "none"
   questionPage.style.display = "block"
-  // lastPage.style.display = "none"
+  openingPage.style.display = "none"
+  document.querySelector('#questions').textContent=questions[0].question;
+  
+  
+   //lastPage.style.display = "none"
+   showQuestions();
 
-
-  document.querySelector('#btns').textContent=choices;
+  document.querySelector('#btns').textContent; //=choices
   var gameTimer = setInterval(function () {
         timer--;
         timerSpan.textContent = timer;
-        if (timer <= 0) {
+        if (timer < 0) {
             clearInterval(gameTimer)
         }
     }, 1000);
 
-  
-    showQuestions();
+    //showQuestions()
+    
     //console.log(showQuestions);
     
     //endgame not working yet.
@@ -85,12 +87,13 @@ btn4.textContent=questions[questionCounter].choices[3];
 }
 
 
-
+//Evaluating write and wrong answers.
 function evalquestion(answer) {
   //console.log(answer)
   if (answer === questions[questionCounter].correctAnswer) {
     console.log('correct');
   } else {
+//Decrement timer if wrong    
     timer -= 30;
     console.log('wrong');
   }
@@ -98,10 +101,10 @@ function evalquestion(answer) {
   questionCounter++
 	 if (questionCounter<questions.length){
     //if there is nomore time or questions endgame
-    endGame();
+    //endGame();
 	 }
 
-  showQuestions();
+  //showQuestions();
 }
 
 document.querySelector('#btns').addEventListener('click', function (e) {
@@ -121,7 +124,7 @@ function endGame (){
   clearInterval(timer);
   // openingPage.style.display = "none"
   // questionPage.style.display = "none"
-  // lastPage.style.display = "block"
+   lastPage.style.display = "block"
 
   // if (timer < 0 || questionCounter > 3) {
   //     // clearInterval (gameTimer);
