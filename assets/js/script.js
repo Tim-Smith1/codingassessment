@@ -12,14 +12,20 @@
 
 var startBtn = document.querySelector("#start");
 var timerSpan = document.querySelector("#timer");
-var timer = 883; 
+var timer = 333; 
 var questionEl = document.querySelector("#questionEl");
 var questionCounter = 0;
+var showScore = document.querySelector("#score")
+
+var openingPage = document.querySelector("#openingPage")
+var questionsPage = document.querySelector("#questionPage")
+var lastPage = document.querySelector("#lastPage")
+
 var questions = [
     {
       question: "Commmonly used data type DO NOT include?",
       choices: ['strings', 'alerts', 'boolean', 'numbers'],
-      correctAnswer: '1',
+      correctAnswer: 'alerts',
     },
     {
       question: "The condition in a if/else statement is enclosed within _?",
@@ -30,16 +36,26 @@ var questions = [
       choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
       correctAnswer: 'Cascading Style Sheets',  
     },
-    { question: "What does CSfghbfghjS stand for?",
-      choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
-      correctAnswer: '3',  
-    }
+    { question: "What does JS stand for?",
+      choices: ['Junky Sand', 'Jumping Shells', 'Junk Sleep', 'JavaScript'],
+      correctAnswer: 'JavaScript',  
+    },
   ];
+
+///diplay block/show
+questionPage.style.display = "none"
+openingPage.style.display = "block"
+lastPage.style.display = "none"
+
 
 startBtn.addEventListener("click", function () {
   document.querySelector('#questions').textContent=questions[0].question;
-  
-  //document.querySelector('.btns').textContent=choices;
+  // openingPage.style.display = "none"
+  questionPage.style.display = "block"
+  // lastPage.style.display = "none"
+
+
+  document.querySelector('#btns').textContent=choices;
   var gameTimer = setInterval(function () {
         timer--;
         timerSpan.textContent = timer;
@@ -47,7 +63,17 @@ startBtn.addEventListener("click", function () {
             clearInterval(gameTimer)
         }
     }, 1000);
+
+  
     showQuestions();
+    //console.log(showQuestions);
+    
+    //endgame not working yet.
+    // function endGame (){
+    //   if (timer < 0 || questionCounter > 4) {
+    //       console.log('endgame');
+    //   }
+    // }
 })
 
 function showQuestions() {
@@ -56,15 +82,56 @@ btn1.textContent=questions[questionCounter].choices[0];
 btn2.textContent=questions[questionCounter].choices[1];
 btn3.textContent=questions[questionCounter].choices[2];
 btn4.textContent=questions[questionCounter].choices[3];
-  //document.querySelector('.questions')
-  //event.preventDefault();
-  //console.log(event)
 }
 
-questionCounter++
-if (questionCounter==questions.length){
-  showResults()
+
+
+function evalquestion(answer) {
+  //console.log(answer)
+  if (answer === questions[questionCounter].correctAnswer) {
+    console.log('correct');
+  } else {
+    timer -= 30;
+    console.log('wrong');
+  }
+//advance to next question
+  questionCounter++
+	 if (questionCounter<questions.length){
+    //if there is nomore time or questions endgame
+    endGame();
+	 }
+
+  showQuestions();
 }
+
+document.querySelector('#btns').addEventListener('click', function (e) {
+  var btnValue = e.target.textContent
+  if (e.target.matches('button')){
+    evalquestion(btnValue)
+    //console.log(e.target.textContent);
+  }
+  //advance to next question
+//showQuestions();
+  // if (evalValue === 'wrong') {
+  //   questionCounter -= 30;
+  // }
+})
+
+function endGame (){
+  clearInterval(timer);
+  // openingPage.style.display = "none"
+  // questionPage.style.display = "none"
+  // lastPage.style.display = "block"
+
+  // if (timer < 0 || questionCounter > 3) {
+  //     // clearInterval (gameTimer);
+  //   console.log('endgame');
+  // }
+}
+
+// function score () {
+//   var Score  
+// }
 
 ///choice1.addEventListener("click", showQuestions);
 
@@ -75,7 +142,10 @@ if (questionCounter==questions.length){
 // Array.from(questions).forEach(function(questions) {
 //   element.addEventListener('click', myFunction);
 // });
-
+//document.querySelector('#questions')
+  //event.preventDefault();
+  //console.log(event)
+  //questionCounter++
 
 
 ////////////////////////

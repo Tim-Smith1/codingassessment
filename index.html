@@ -8,28 +8,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div >
+    <p>High Scores</p>
+    <p><span id="timer">0</span> seconds remaining</p> 
+    
+    
+    <div id="openingPage">
         <h1>JavaScript Quiz</h1>
+        <h2 id="score"></h2>
         <button id="start">Start</button>
     </div>
 
-    <div>
-        <span id="timer">0</span>
-        seconds remaining
-    </div>
-
-    <div>
+    <div id="questionPage">
         <span id="questions" ></span>
-    </div>
     
-    <div id="btns">
+    
+        <div id="btns">
         <h1 id="questionEl"></h1>
         <button id="btn1"></button>
         <button id="btn2"></button>
         <button id="btn3"></button>
         <button id="btn4"></button>
+        </div>
     </div>
 
+    <div id="lastPage">
+        <p>All done!</p>
+    </div>
 
     <script src="./assets/js/script.js"></script>  
 </body>
