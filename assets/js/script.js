@@ -3,16 +3,16 @@
 //start button /
 //timer /
 // 5 questions with multiple choice awnsers
-        //advance to next question
+//advance to next question
 //test if awnser is corect or not
-   // if yes adavnce to next question
-   // if not reduce time available
+// if yes adavnce to next question
+// if not reduce time available
 // end game when timer is done or all questions are awnsered correctly
 // save score 
 
 var startBtn = document.querySelector("#start");
 var timerSpan = document.querySelector("#timer");
-var timer = 333; 
+var timer = 333;
 var questionEl = document.querySelector("#questionEl");
 var questionCounter = 0;
 var showScore = document.querySelector("#score")
@@ -22,68 +22,103 @@ var questionsPage = document.querySelector("#questionPage")
 var lastPage = document.querySelector("#lastPage")
 
 var questions = [
-    {
-      question: "Commmonly used data type DO NOT include?",
-      choices: ['strings', 'alerts', 'boolean', 'numbers'],
-      correctAnswer: 'alerts',
-    },
-    {
-      question: "The condition in a if/else statement is enclosed within _?",
-      choices: ['quotes', 'parentheses', 'curly brackets', 'underscores'],
-      correctAnswer: 'curly brackets',
-    }, 
-    { question: "What does CSS stand for?",
-      choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
-      correctAnswer: 'Cascading Style Sheets',  
-    },
-    { question: "What does JS stand for?",
-      choices: ['Junky Sand', 'Jumping Shells', 'Junk Sleep', 'JavaScript'],
-      correctAnswer: 'JavaScript',  
-    },
-  ];
+  {
+    question: "Commmonly used data type DO NOT include?",
+    choices: ['strings', 'alerts', 'boolean', 'numbers'],
+    correctAnswer: 'alerts',
+  },
+  {
+    question: "The condition in a if/else statement is enclosed within _?",
+    choices: ['quotes', 'parentheses', 'curly brackets', 'underscores'],
+    correctAnswer: 'curly brackets',
+  },
+  {
+    question: "What does CSS stand for?",
+    choices: ['Calm Sleeping Cats', 'Crazy Sea Shells', 'Corn Stalk Strands', 'Cascading Style Sheets'],
+    correctAnswer: 'Cascading Style Sheets',
+  },
+  {
+    question: "What does JS stand for?",
+    choices: ['Junky Sand', 'Jumping Shells', 'Junk Sleep', 'JavaScript'],
+    correctAnswer: 'JavaScript',
+  },
+];
 
 ///diplay block/show
- questionPage.style.display = "none"
+questionPage.style.display = "none"
 openingPage.style.display = "block"
- lastPage.style.display = "none"
+lastPage.style.display = "none"
 
 
 startBtn.addEventListener("click", function () {
+  // show some html
   questionPage.style.display = "block"
+  // hide some html
   openingPage.style.display = "none"
-  document.querySelector('#questions').textContent=questions[0].question;
-  
-  
-   //lastPage.style.display = "none"
-   showQuestions();
+  // document.querySelector('#questions').textContent = questions[0].question;
 
-  document.querySelector('#btns').textContent; //=choices
+
+
+  //lastPage.style.display = "none"
+  // showQuestions();
+  // put all the choices into the buttons?
+  // reaching in the  html and grabbing a div you want
+  var buttonsDivEl = document.querySelector('#btns')
+  // change the value of the div to choices
+  console.log(buttonsDivEl)
+
+
+  // get the answers to the question i'm on
+  // var choices = questions[0].choices;
+
+  // // for each of the choices (for loop)
+  // for (var index = 0; index < choices.length; index++) {
+  //   // grab the x choice out of the choice array
+  //   var currentChoice = choices[index]
+  //   console.log(currentChoice)
+  //   // -- get the button X button
+  //   var btnEl = document.querySelector("#btn" + index)
+  //   console.log(btnEl)
+  //   console.dir(btnEl)
+  //   // -- put choices[x] into the button (textContent)
+  //   btnEl.textContent = currentChoice
+
+  // }
+
+  // put each one of my choices inside of my buttons
+
+
+  // buttonsDivEl.textContent = choices;
   var gameTimer = setInterval(function () {
-        timer--;
-        timerSpan.textContent = timer;
-        if (timer < 0) {
-            clearInterval(gameTimer)
-        }
-    }, 1000);
+    timer--;
+    timerSpan.textContent = timer;
+    if (timer < 0) {
+      clearInterval(gameTimer)
+    }
+  }, 1000);
 
-    //showQuestions()
-    
-    //console.log(showQuestions);
-    
-    //endgame not working yet.
-    // function endGame (){
-    //   if (timer < 0 || questionCounter > 4) {
-    //       console.log('endgame');
-    //   }
-    // }
+  showQuestions()
+
+  //console.log(showQuestions);
+
+  //endgame not working yet.
+  // function endGame (){
+  //   if (timer < 0 || questionCounter > 4) {
+  //       console.log('endgame');
+  //   }
+  // }
 })
 
 function showQuestions() {
-questionEl.textContent=questions[questionCounter].question;
-btn1.textContent=questions[questionCounter].choices[0];
-btn2.textContent=questions[questionCounter].choices[1];
-btn3.textContent=questions[questionCounter].choices[2];
-btn4.textContent=questions[questionCounter].choices[3];
+  questionEl.textContent = questions[questionCounter].question;
+  document.querySelector('#btn0').textContent = questions[questionCounter].choices[0];
+  document.querySelector('#btn1').textContent = questions[questionCounter].choices[1];
+  document.querySelector('#btn2').textContent = questions[questionCounter].choices[2];
+  document.querySelector('#btn3').textContent = questions[questionCounter].choices[3];
+  if (questionCounter > 3) {
+    
+    console.log('done');
+  }
 }
 
 
@@ -93,38 +128,38 @@ function evalquestion(answer) {
   if (answer === questions[questionCounter].correctAnswer) {
     console.log('correct');
   } else {
-//Decrement timer if wrong    
+    //Decrement timer if wrong    
     timer -= 30;
     console.log('wrong');
   }
-//advance to next question
+  //advance to next question
   questionCounter++
-	 if (questionCounter<questions.length){
+  if (questionCounter < questions.length) {
     //if there is nomore time or questions endgame
     //endGame();
-	 }
+  }
 
-  //showQuestions();
+  showQuestions();
 }
 
 document.querySelector('#btns').addEventListener('click', function (e) {
   var btnValue = e.target.textContent
-  if (e.target.matches('button')){
+  if (e.target.matches('button')) {
     evalquestion(btnValue)
     //console.log(e.target.textContent);
   }
   //advance to next question
-//showQuestions();
+  //showQuestions();
   // if (evalValue === 'wrong') {
   //   questionCounter -= 30;
   // }
 })
 
-function endGame (){
+function endGame() {
   clearInterval(timer);
   // openingPage.style.display = "none"
   // questionPage.style.display = "none"
-   lastPage.style.display = "block"
+  lastPage.style.display = "block"
 
   // if (timer < 0 || questionCounter > 3) {
   //     // clearInterval (gameTimer);
